@@ -1,0 +1,10 @@
+			input.visa {
+				background-image: url(visa.jpg);
+				background-position: right;
+				background-repeat: no-repeat;
+			}
+			input.americanexpress {
+				background-image: url(americanexpress.gif);
+				background-position: right;
+				background-repeat: no-repeat;
+			}

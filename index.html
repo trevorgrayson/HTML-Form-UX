@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>HTML Form UX</title>
+		<link type="text/css" rel="stylesheet" href="html-form-ux.css"/>
+		<script type="text/javascript" src="html-form-ux.js"></script>
+		<script type="text/javascript">
+			function init(){
+
+				document.getElementById('email').onkeyup = emailChange;
+				document.getElementById('creditcard').onkeyup = creditCardChange;
+
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>HTML Form UX</h1>
+		<p>Better forms through Javascript.</p>
+		<fieldset>
+			<legend>Example Form Fields</legend>
+			<h3>Credit Card Number Entry</h3>
+			<p>Why ask users what type of credit card they are paying with, when you can tell them?  Not only is asking a user what service they use irrelivant, but its a missed opportunity to sanity check the number they put into the form.  The first 2-4 leading digits of a credit card should indicate which creditor they are using.  In this field we may ignore invalid alpha characters.  And by adding the traditional white space, as used by each card, we improve readability, and allow the user to more easily confirm their entry.</p>
+			<p>Begin typing in a valid creditcard number (don't submit :-P), or use one of the following fakies:</p>
+			<ul>
+				<li>American Express: 37120000...</li>
+				<li>Visa: 410000000...</li>
+			</ul>
+			<p>
+				<label for="creditcard">Credit Card</label>
+				<input id="creditcard" name="creditcard"/>
+			</p>
+
+			<h3>Email Entry</h3>
+			<p>The usability of this is debatable at this point. But in the least, it should be useful for expediting a form for smartphones users.  If we are making an email field, we know what that address is going to look like XXX@YYY.com (most likely.)  If we can lubricate that process for the user, without interrupting their regular work flow, we should get some small gains here.</p>
+			<p>
+				<label for="email">Email</label>
+				<input id="email" name="email"/>
+			</p>
+		</fieldset>
+
+		
+	</body>
+</html>
