@@ -8,3 +8,13 @@
 				background-position: right;
 				background-repeat: no-repeat;
 			}
+			input.discover {
+				background-image: url(discover.jpg);
+				background-position: right;
+				background-repeat: no-repeat;
+			}
+			input.dinersclub {
+				background-image: url(dinersclub.jpg);
+				background-position: right;
+				background-repeat: no-repeat;
+			}
