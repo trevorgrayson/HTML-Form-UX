@@ -3,6 +3,7 @@ HTMLFormUX = {
   EMAIL_REGEXP_MINUS_COM: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+$/,
   EMAIL_REGEXP_MINUS_AT: /^[A-Za-z0-9._%+-]+$/,
   CARD_NAME_REGEXP: /^[A-Za-z][A-Za-z.,-/&' ]$/,
+  form: null,
 
   createSelection: function (field, start, end) {
       if( field.createTextRange ) {
@@ -27,8 +28,9 @@ HTMLFormUX = {
 
   },
 
-  validateLuhn: function (n) {
+  validateLuhn: function (input) {
       var x, i = 0, sum = 0;
+      var n = input.value.replace(/[^0-9]/g,'');
       n.toString().split('').reverse().forEach(function (n) {
           n = Number(n);
           if(i % 2 > 0) {
