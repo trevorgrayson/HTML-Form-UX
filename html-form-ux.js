@@ -72,8 +72,13 @@ HTMLFormUX = {
           input.className = input.className + ' ' + card.label;
           acceptedCardsUl.className = acceptedCardsUl.className + ' ' + card.label;
         }
-        space_locations = card.space_locations;
-        max_len = card.max_len;
+
+        if( card.space_locations ) {
+          space_locations = card.space_locations;
+        }
+        if( card.max_len ) {
+          max_len = card.max_len;
+        }
         break;
       }
     }
@@ -142,20 +147,16 @@ HTMLFormUX = {
   creditCardList: [
     {
       regexp: /^4/,
-      label: 'visa',
-      space_locations: [4,8,12]
+      label: 'visa'
     }, {
       regexp: /^5[1-5]/,
-      label: 'mastercard',
-      space_locations: [4,8,12]
+      label: 'mastercard'
     }, {
       regexp: /^30[1-5]/,
-      label: 'dinersclub',
-      space_locations: [4,8,12]
+      label: 'dinersclub'
     }, {
       regexp: /^6011|^65/,
-      label: 'discover',
-      space_locations: [4,8,12]
+      label: 'discover'
     }, {
       regexp: /^3[47]/,
       label: 'americanexpress',
