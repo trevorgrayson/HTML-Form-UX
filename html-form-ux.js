@@ -52,48 +52,27 @@ HTMLFormUX = {
   prettyCreditCard: function (input) {
     var value = input.value;
     var max_len = 16; //Most are.
-    var space_locations = [];
+    var space_locations = [4,8,12];
+    var output = '';
+    var i=0;
+
 
     //clean out non numerics
     value = value.replace(/[^0-9]/g,'');
 
     input.className = input.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
-    if( /^4/.test(value) ) {
-      if(!/visa/.test(input.className)){
-        input.className = input.className + ' visa';
-      }
-      space_locations = [4,8,12]
-    } else if( /^5[1-5]/.test(value) ) {
-      if(!/mastercard/.test(input.className)){
-        input.className = input.className + ' mastercard';
-      }
-      space_locations = [4,8,12]
-    } else if( /^30[1-5]/.test(value) ) {
-      if(!/dinersclub/.test(input.className)){
-        input.className = input.className + ' dinersclub';
-      }
-      space_locations = [4,8,12]
-    } else if( /^6011|^65/.test(value) ) {
-      if(!/discover/.test(input.className)){
-        input.className = input.className + ' discover';
-      }
-      space_locations = [4,8,12]
-    } else if( /^3[47]/.test(value) ) {
-      if(!/americanexpress/.test(input.className)){
-        input.className = input.className + ' americanexpress';
-      }
-      space_locations = [4,10]
-      max_len = 15;
-    } else if( /^2131|^1800/.test(value) ) {
-      if(!/jcb/.test(input.className)){
-        input.className = input.className + ' jcb';
-      }
-      space_locations = [4,10]
-      max_len = 15;
-    }
+    for( n in HTMLFormUX.creditCardList ) {
+      var card = HTMLFormUX.creditCardList[n];
+      var labelRegExp = new RegExp(card.label);
 
-    var output = '';
-    var i=0;
+      if( card['regexp'].test(value) ) {
+        if(!labelRegExp.test(input.className)){
+          input.className = input.className + ' ' + card.label;
+        }
+        space_locations = card.space_locations;
+        break;
+      }
+    }
 
     //build card number with spaces
     for( space in space_locations ) {
@@ -154,8 +133,37 @@ HTMLFormUX = {
       document.getElementById('state').value = response['state']
     }
 
-  }
+  },
 
+  creditCardList: [
+    {
+      regexp: /^4/,
+      label: 'visa',
+      space_locations: [4,8,12]
+    }, {
+      regexp: /^5[1-5]/,
+      label: 'mastercard',
+      space_locations: [4,8,12]
+    }, {
+      regexp: /^30[1-5]/,
+      label: 'dinersclub',
+      space_locations: [4,8,12]
+    }, {
+      regexp: /^6011|^65/,
+      label: 'discover',
+      space_locations: [4,8,12]
+    }, {
+      regexp: /^3[47]/,
+      label: 'americanexpress',
+      space_locations: [4,10],
+      max_len: 15
+    }, {
+      regexp: /^2131|^1800/,
+      label: 'jcb',
+      space_locations: [4,10],
+      max_len: 15
+    }
+  ]
 }
 
 /*
