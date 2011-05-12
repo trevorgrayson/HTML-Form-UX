@@ -55,12 +55,14 @@ HTMLFormUX = {
     var space_locations = [4,8,12];
     var output = '';
     var i=0;
+    var acceptedCardsUl = document.getElementById('accepted_cards');
 
 
     //clean out non numerics
     value = value.replace(/[^0-9]/g,'');
 
     input.className = input.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
+    acceptedCardsUl.className = acceptedCardsUl.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
     for( n in HTMLFormUX.creditCardList ) {
       var card = HTMLFormUX.creditCardList[n];
       var labelRegExp = new RegExp(card.label);
@@ -68,8 +70,10 @@ HTMLFormUX = {
       if( card['regexp'].test(value) ) {
         if(!labelRegExp.test(input.className)){
           input.className = input.className + ' ' + card.label;
+          acceptedCardsUl.className = acceptedCardsUl.className + ' ' + card.label;
         }
         space_locations = card.space_locations;
+        max_len = card.max_len;
         break;
       }
     }
