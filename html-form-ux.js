@@ -62,7 +62,10 @@ HTMLFormUX = {
     value = value.replace(/[^0-9]/g,'');
 
     input.className = input.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
-    acceptedCardsUl.className = acceptedCardsUl.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
+    if( acceptedCardsUl ) {
+      acceptedCardsUl.className = acceptedCardsUl.className.replace(/\sjcb|\svisa|\smastercard|\sdinersclub|\sdiscover|\samericanexpress/,'')
+    }
+
     for( n in HTMLFormUX.creditCardList ) {
       var card = HTMLFormUX.creditCardList[n];
       var labelRegExp = new RegExp(card.label);
@@ -70,7 +73,9 @@ HTMLFormUX = {
       if( card['regexp'].test(value) ) {
         if(!labelRegExp.test(input.className)){
           input.className = input.className + ' ' + card.label;
-          acceptedCardsUl.className = acceptedCardsUl.className + ' ' + card.label;
+          if( acceptedCardsUl ) {
+            acceptedCardsUl.className = acceptedCardsUl.className + ' ' + card.label;
+          }
         }
 
         if( card.space_locations ) {
