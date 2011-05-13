@@ -116,7 +116,8 @@ HTMLFormUX = {
   },
 
   emailChange: function(e){
-    if( e.keyCode != 8 && e.keyCode != 46 ) { /*backspace, delete */
+    var keyCode = e.keyCode? e.keyCode : e.charCode
+    if( keyCode != 8 && keyCode != 46 ) { /*backspace, delete */
       var length = this.value.length;
 
       if( HTMLFormUX.EMAIL_REGEXP_MINUS_COM.test(this.value) ) {
@@ -131,7 +132,8 @@ HTMLFormUX = {
   },
 
   creditCardChange: function(e) {
-    if( e.keyCode != 8 && e.keyCode != 46 ) { /*backspace, delete */
+    var keyCode = e.keyCode? e.keyCode : e.charCode
+    if( keyCode != 8 && keyCode != 46 ) { /*backspace, delete */
       HTMLFormUX.prettyCreditCard(this);
     }
   },
