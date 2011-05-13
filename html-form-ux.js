@@ -97,7 +97,7 @@ HTMLFormUX = {
           continue;
         }
 
-        output += value[i]
+        output += value.charAt(i);
       }
 
       output += ' '
@@ -105,7 +105,7 @@ HTMLFormUX = {
 
     //finish rest of card
     for(i=i; i <= value.length - 1; i++) {
-      output += value[i];
+      output += value.charAt(i);
     }
 
     output = output.replace(/\s+$/,''); //cut off last space if necessary
