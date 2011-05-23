@@ -28,6 +28,14 @@ HTMLFormUX = {
 
   },
 
+  validateCreditCard: function (input) {
+    if( input.length > 12 ) {
+      return validateLuhn(input);
+    }
+
+    return false;
+  },
+
   validateLuhn: function (input) {
       var x, i = 0, sum = 0;
       var n = input.value.replace(/[^0-9]/g,'');
