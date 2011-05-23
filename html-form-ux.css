@@ -4,6 +4,12 @@ li.visa {
 	background-position: right;
 	background-repeat: no-repeat;
 }
+/*input.mastercard,*/
+li.mastercard {
+	background-image: url(mastercard.jpg);
+	background-position: right;
+	background-repeat: no-repeat;
+}
 /*input.americanexpress,*/
 li.americanexpress {
 	background-image: url(americanexpress.gif);
@@ -32,6 +38,7 @@ li.dinersclub {
 
 .discover li,
 .visa li,
+.mastercard li,
 .dinersclub li,
 .americanexpress li {
   -moz-opacity: 0.5;
@@ -43,6 +50,7 @@ li.dinersclub {
 
 .discover .discover,
 .visa .visa,
+.mastercard .mastercard,
 .dinersclub .dinersclub,
 .americanexpress .americanexpress {
   -moz-opacity: 1.0;
