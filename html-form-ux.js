@@ -3,7 +3,11 @@ HTMLFormUX = {
   EMAIL_REGEXP_MINUS_COM: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+$/,
   EMAIL_REGEXP_MINUS_AT: /^[A-Za-z0-9._%+-]+$/,
   CARD_NAME_REGEXP: /^[A-Za-z][A-Za-z.,-/&' ]$/,
-  form: null,
+  forms: null,
+
+  register: function (form) {
+    form.onsubmit = HTMLFormUX.validateForm;
+  },
 
   createSelection: function (field, start, end) {
       if( field.createTextRange ) {
@@ -21,16 +25,35 @@ HTMLFormUX = {
       field.focus();
   },       
 
-  validateForm: function () {
-    //validateLuhn on credit cards
-    //validate expiry date selected?
-    //validate card name
+  validateForm: function (form) {
 
+    for( i in form.elements ) {
+      if( !HTMLFormUX.validateField( form.elements[i] ) ) {
+        return false;
+      }
+    }
+
+    return true;
+  },
+
+  validateField: function (input) {
+    var test = HTMLFormUX.taxonomies[input.name];
+
+    switch( typeof test ) {
+      case 'function': return test(input);
+      case 'object':   return test.test(input.value); //RegExp
+    }
+
+    return true
+  },
+
+  validatecreditcard: function (input) {
+    HTMLFormUX.validateCreditCard(input);
   },
 
   validateCreditCard: function (input) {
-    if( input.length > 12 ) {
-      return validateLuhn(input);
+    if( input.value.length > 12 ) {
+      return HTMLFormUX.validateLuhn(input);
     }
 
     return false;
@@ -53,8 +76,16 @@ HTMLFormUX = {
       return sum % 10 == 0;
   },
 
-  validateCardName: function (n) {
+  validateAlpha: function (input) {
+    return HTMLFormUX.validateRegEx( input, /[A-Za-z_ ]+/ );
+  },
 
+  validateNumber: function (input) {
+    return HTMLFormUX.validateRegEx( input, /[0-9]+/ );
+  },
+
+  validateRegEx: function (input, regex) {
+    return regex.test( input.value );
   },
 
   prettyCreditCard: function (input) {
@@ -185,14 +216,12 @@ HTMLFormUX = {
       space_locations: [4,10],
       max_len: 15
     }
-  ]
+  ],
+
+  taxonomies: {
+    'number':   /[0-9]+/,
+    cvv:        /[0-9]+/,
+    creditcard: function(input) { return HTMLFormUX.validateCreditCard(input) },
+    alpha:      /[A-Za-z_ ]+/
+  }
 }
-
-/*
-	document.getElementById('zipcode').onkeyup = function(e) {
-		if( this.value.length > 4 ) {
-			zipcodeComplete(this);
-		}
-	}
-*/
-
