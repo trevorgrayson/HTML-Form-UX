@@ -32,7 +32,7 @@ HTMLFormUX = {
     for( i in this.elements ) {
       element = this.elements[i];
       if( element.className ) {
-        element.className = element.className.replace(/ html-form-ux-[a-z]/,'');
+        element.className = element.className.replace(/ html-form-ux-[a-z]+/,'');
       }
 
       if( !HTMLFormUX.validateField( element ) ) {
