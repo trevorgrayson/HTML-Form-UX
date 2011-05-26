@@ -25,15 +25,24 @@ HTMLFormUX = {
       field.focus();
   },       
 
-  validateForm: function (form) {
+  validateForm: function () {
+    var stat = true;
+    var element;
 
-    for( i in form.elements ) {
-      if( !HTMLFormUX.validateField( form.elements[i] ) ) {
-        return false;
+    for( i in this.elements ) {
+      element = this.elements[i];
+      if( element.className ) {
+        element.className = element.className.replace(/ html-form-ux-[a-z]/,'');
+      }
+
+      if( !HTMLFormUX.validateField( element ) ) {
+        stat = false;
+        element.className = element.className + ' html-form-ux-invalid';
+        
       }
     }
 
-    return true;
+    return stat;
   },
 
   validateField: function (input) {
@@ -218,8 +227,12 @@ HTMLFormUX = {
     }
   ],
 
+  setType: function(field, type) {
+    HTMLFormUX.taxonomies[field] = HTMLFormUX.taxonomies[type];
+  },
+
   taxonomies: {
-    'number':   /[0-9]+/,
+    numeric:   /[0-9]+/,
     cvv:        /[0-9]+/,
     creditcard: function(input) { return HTMLFormUX.validateCreditCard(input) },
     alpha:      /[A-Za-z_ ]+/
