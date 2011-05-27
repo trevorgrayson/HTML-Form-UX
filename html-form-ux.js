@@ -48,9 +48,10 @@ HTMLFormUX = {
   validateField: function (input) {
     var test = HTMLFormUX.taxonomies[input.name];
 
-    switch( typeof test ) {
-      case 'function': return test(input);
-      case 'object':   return test.test(input.value); //RegExp
+    if( test && test.test && (typeof test.test == 'function') ) { //RegExp
+      return test.test(input.value); 
+    } else if ( typeof test == 'function' ) {
+      return test(input);
     }
 
     return true
