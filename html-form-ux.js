@@ -138,8 +138,8 @@ HTMLFormUX = {
     }
 
     //build card number with spaces
-    for( space in space_locations ) {
-      space = space_locations[space];
+    for( var x = 0; x < space_locations.length; x++ ) {
+      space = space_locations[x];
 
       for(i=i; i < space; i++ ) {
         if(i >= value.length) {
@@ -149,7 +149,7 @@ HTMLFormUX = {
         output += value.charAt(i);
       }
 
-      output += ' '
+      output += ' ';
     }
 
     //finish rest of card
@@ -204,27 +204,19 @@ HTMLFormUX = {
 
   creditCardList: [
     {
-      regexp: /^4/,
-      label: 'visa'
+      label: 'visa', regexp: /^4/
     }, {
-      regexp: /^5[1-5]/,
-      label: 'mastercard'
+      label: 'mastercard', regexp: /^5[1-5]/
     }, {
-      regexp: /^30[1-5]/,
-      label: 'dinersclub'
+      label: 'dinersclub', regexp: /^30[1-5]/
     }, {
-      regexp: /^6011|^65/,
-      label: 'discover'
+      label: 'discover', regexp: /^6011|^65/
     }, {
-      regexp: /^3[47]/,
-      label: 'americanexpress',
-      space_locations: [4,10],
-      max_len: 15
+      label: 'americanexpress', regexp: /^3[47]/,
+      space_locations: [4,10], max_len: 15
     }, {
-      regexp: /^2131|^1800/,
-      label: 'jcb',
-      space_locations: [4,10],
-      max_len: 15
+      label: 'jcb', regexp: /^2131|^1800/,
+      space_locations: [4,10], max_len: 15
     }
   ],
 
